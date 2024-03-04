@@ -1,10 +1,10 @@
 // back to top 
 var backToTopButton = document.getElementById("backToTopBtn");
-window.onscroll = function() {
-    scrollFunction();
-}
+
+window.addEventListener("scroll", scrollFunction);
+
 function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    if (document.documentElement.scrollTop > 20 ) {
         backToTopButton.style.display = "block" ; 
     } else {
         backToTopButton.style.display = "none" ; 
@@ -12,19 +12,18 @@ function scrollFunction() {
     }
 }
 
-function scrollToTop() {
-    document.body.scrollTop = 0 ;
-    document.documentElement.scrollTop = 0 ;
+function scrollToTop(){
+    window.scrollTo({ top : 0, behavior: 'smooth'});
 
 }
 
 // resize height 
-const setHeight = () => {
-    const currentHeight = window.innerHeight;
-    document.body.style.height = `${currentHeight}px`; 
-}; 
-window.addEventListener("resize", setHeight);
-setHeight();
+//const setHeight = () => {
+//    const currentHeight = window.innerHeight;
+//    document.body.style.height = `${currentHeight}px`; 
+//}; 
+//window.addEventListener("resize", setHeight);
+//setHeight();
 
 // search box / nav menu with responsive image gallery
 
@@ -47,22 +46,21 @@ toutesMenuItem.addEventListener("click", () => {
 
 // dessiner menu
 const dessinerMenuItem = document.getElementById("dessiner");
-dessinerMenuItem.addEventListener("click", () =>{
-    images.forEach(image => {
+dessinerMenuItem.addEventListener("click", () => {
+    images.forEach( image => {
         let imageName = image.dataset.name.toLowerCase();
         console.log(imageName);
         if(imageName.includes("dessiner")) {
             image.style.display = "block";
-        } else {
+        }else {
             image.style.display = "none";
         }
-    });
-});
-
+    })
+})
 
 //3D menu 
 const threedMenuItem = document.getElementById("3D");
-dessinerMenuItem.addEventListener("click", () =>{
+threedMenuItem.addEventListener("click", () =>{
     images.forEach(image => {
         let imageName = image.dataset.name.toLowerCase();
         console.log(imageName);
@@ -74,9 +72,10 @@ dessinerMenuItem.addEventListener("click", () =>{
     });
 });
 
+
 // danser menu 
 const danserMenuItem = document.getElementById("danser");
-dessinerMenuItem.addEventListener("click", () =>{
+danserMenuItem.addEventListener("click", () =>{
     images.forEach(image => {
         let imageName = image.dataset.name.toLowerCase();
         console.log(imageName);
@@ -96,7 +95,7 @@ search.addEventListener("keyup", e =>{
             images.forEach(image => {
                 let imageName = image.dataset.name.toLowerCase();
 
-                if(imageName.includes(searchValue)) {
+                if(imageName.includes(searchValue) || searchValue === "") {
                     image.style.display = "block";
                 } else {
                 image.style.display = "none";}
